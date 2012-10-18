@@ -146,7 +146,13 @@
 			});
 		});
 	</script>
+	<link href='http://fonts.googleapis.com/css?family=Archivo+Narrow:400,700' rel='stylesheet' type='text/css'>
 	<style>
+		body {
+			font-family: 'Archivo Narrow', sans-serif;
+			width: 960px;
+			margin: 0 auto;
+		}
 		td {
 			width: 150px;
 			height: 150px;
@@ -160,14 +166,25 @@
 		.selected {
 			background: #A00;
 		}
+		h1 {
+			text-align: center;
+		}
+		aside {
+			display: inline-block;
+			width: 200px;
+			vertical-align: top;
+		}
+		section {
+			width: 750px;
+			display: inline-block;
+		}
 	</style>
 </head>
 <body>
 	<div class="container">
 		<div class="row">
 			<div class="span16">
-				<h1><?php echo $title; ?></h1>
-				<hr>
+				<h1>Novatnak Bingo</h1>
 <?php if (Session::get_flash('success')): ?>
 				<div class="alert-message success">
 					<p>
