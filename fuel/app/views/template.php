@@ -184,8 +184,13 @@
 <?php endif; ?>
 			</div>
 			<div>
+		<?php if (Session::get('username')) { ?>
 			<p>User: <?=Session::get('username')?></p>
 			<p><a href="/user/logout">Logout</a></p>
+		<?php } else { ?>
+			<p><a href="/user/register">Register</a></p>
+			<p><a href="/user/login">Login</a></p>
+		<?php } ?>
 
 <?php echo $content; ?>
 			</div>
