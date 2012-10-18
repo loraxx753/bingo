@@ -1,0 +1,5 @@
+fuel/app/config/development/*
+!fuel/app/config/development/templat.*
+
+fuel/app/logs
+!fuel/app/logs/.gitignore
