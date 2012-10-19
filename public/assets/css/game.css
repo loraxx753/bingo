@@ -104,6 +104,9 @@ h3 {
 	text-align: right;
 	padding-right: 17px;
 }
+section {
+	position: relative;
+}
 .wintext {
 	position: absolute;
 	font-size: 6em;
@@ -111,9 +114,9 @@ h3 {
 	box-shadow: 3px 3px 4px black;
 	background: black;
 	-webkit-transform: rotate(-38deg);
-	-moz-transform: rotate(-34deg);
+	-moz-transform: rotate(-38deg);
 	padding: 15px;
-	bottom: 108px;
-	left: 119px;
+	bottom: 89px;
+	left: -75px;
 	width: 775px;
 }
