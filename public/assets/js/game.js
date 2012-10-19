@@ -19,10 +19,17 @@ function heartbeat() {
 				chosen[row][column] = 1;
 			}
 		}
-		if(username != data.winner && determined == false && data.winner != false)
+		if(determined == false && data.winner != false)
 		{
-			winner = true;
-			alert(data.winner+" won!");
+			determined = true;
+			if(username != data.winner)
+			{
+				end_game(data.winner+" won!");
+			}
+			else
+			{
+				end_game("You are the winner!");
+			}
 		}
 		if(data.chat != false)
 		{
@@ -95,9 +102,14 @@ function win_check() {
 		hash = document.URL.split('/').pop();
 		winner = true;
 		$.post('/game/winner/'+hash, { 'winner' : username }, function() {
-			alert('You are the winner!');
+			end_game('You are the winner!');
 		});
 	}
+}
+
+function end_game(wintext){
+	$('table').before("<p class='wintext'>"+wintext+"</p>");
+	$('td').unbind('click');
 }
 chosen = Array(
 	Array(0,0,0,0,0), 

@@ -104,3 +104,16 @@ h3 {
 	text-align: right;
 	padding-right: 17px;
 }
+.wintext {
+	position: absolute;
+	font-size: 6em;
+	color: white;
+	box-shadow: 3px 3px 4px black;
+	background: black;
+	-webkit-transform: rotate(-38deg);
+	-moz-transform: rotate(-34deg);
+	padding: 15px;
+	bottom: 108px;
+	left: 119px;
+	width: 775px;
+}
