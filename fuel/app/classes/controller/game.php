@@ -97,6 +97,7 @@ class Controller_Game extends Controller_Template
 		$return['players'] = json_decode($game->players, true);
 		$return['moves'] = json_decode($game->moves, true);
 		$return['winner'] = ($game->winner) ? $game->winner : false;
+		$return['chat'] = ($game->chat) ? $game->chat : false;
 		return json_encode($return);
 	}
 	public function action_leave($crypt)

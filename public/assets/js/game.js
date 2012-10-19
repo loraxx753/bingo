@@ -28,6 +28,10 @@ function heartbeat() {
 			clearInterval(beat);
 			alert(data.winner+" won!");
 		}
+		if(data.chat)
+		{
+			$('#chat').html(data.chat);
+		}
 
 	}, 'json');
 }
