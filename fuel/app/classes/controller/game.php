@@ -68,6 +68,7 @@ class Controller_Game extends Controller_Template
 		$players = json_decode($game->players, true);
 		$players[] = Session::get('username');
 		$game->players = json_encode($players);
+		$game->chat = $this->add_chat($game->chat, "<p class='action'>".Session::get('username')." has joined the game.</p>");
 		$game->save();
 		Response::redirect('/game/play/'.$crypt);
 	}
@@ -97,7 +98,7 @@ class Controller_Game extends Controller_Template
 		$return['players'] = json_decode($game->players, true);
 		$return['moves'] = json_decode($game->moves, true);
 		$return['winner'] = ($game->winner) ? $game->winner : false;
-		$return['chat'] = ($game->chat) ? $game->chat : false;
+		$return['chat'] = ($game->chat) ? unserialize($game->chat) : false;
 		return json_encode($return);
 	}
 	public function action_leave($crypt)
@@ -108,6 +109,7 @@ class Controller_Game extends Controller_Template
 		    unset($players[$key]);
 		}
 		$game->players = json_encode((array)$players);
+		$game->chat = $this->add_chat($game->chat, "<p class='action'>".Session::get('username')." has left.</p>");
 		$game->save();
 		Response::redirect('/manager');
 	}
@@ -122,8 +124,17 @@ class Controller_Game extends Controller_Template
 	{
 		$this->template = null;
 		$game = Model_Game::find_by_id(Crypt::decode($crypt));
-		$game->chat .= "<p><strong>".Session::get('username').": </strong> ".htmlspecialchars(Input::post('text'))."</p>";
+		$game->chat = $this->add_chat($game->chat, "<p><strong>".Session::get('username').": </strong> ".htmlspecialchars(Input::post('text'))."</p>");
+		$chat = unserialize($game->chat);
 		$game->save();
-		echo $game->chat;
+
+		echo json_encode($chat);
+	}
+	private function add_chat($chat, $string)
+	{
+		$chatArray = unserialize($chat);
+		$chatArray[] = $string;
+		$return = serialize($chatArray);
+		return $return;
 	}
 }

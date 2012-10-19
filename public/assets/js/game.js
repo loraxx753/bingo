@@ -19,21 +19,16 @@ function heartbeat() {
 				chosen[row][column] = 1;
 			}
 		}
-		if(!data.winner)
+		if(username != data.winner && determined == false && data.winner != false)
 		{
-			win_check();
-		}
-		else if(username != data.winner)
-		{
-			clearInterval(beat);
+			winner = true;
 			alert(data.winner+" won!");
 		}
-		if(data.chat)
+		if(data.chat != false)
 		{
-			var prev_chat = $('#chat').html();
-			if(prev_chat != data.chat)
+			if(prev_chat.length < data.chat.length)
 			{
-				$('#chat').html(data.chat);
+				$('#chat').html(data.chat.join(''));
 				$("#chat").animate({ scrollTop: $("#chat")[0].scrollHeight });
 			}
 		}
@@ -98,6 +93,7 @@ function win_check() {
 	if(row_check() || column_check() || diagnoal_check_left() || diagnoal_check_right())
 	{
 		hash = document.URL.split('/').pop();
+		winner = true;
 		$.post('/game/winner/'+hash, { 'winner' : username }, function() {
 			alert('You are the winner!');
 		});
@@ -110,6 +106,8 @@ chosen = Array(
 	Array(0,0,0,0,0), 
 	Array(0,0,0,0,0)
 );
+determined = false;
+var prev_chat = Array();
 
 $(document).ready(function() {
 	heartbeat();
@@ -140,6 +138,7 @@ $(document).ready(function() {
 			chosen[row][column] = 0;
 			$.post('/game/unmove/'+hash, {'square' : square});
 		}
+		win_check();
 		beat = setInterval(heartbeat, 1000);
 	});
 	$('#chat_input').keypress(function(e) {
@@ -150,9 +149,10 @@ $(document).ready(function() {
 			hash = document.URL.split('/').pop();
 			$.post('/game/chat/'+hash, {'text' : text}, function(data) {
 				$this.val('');
-				$('#chat').html(data);
+				prev_chat = data;
+				$('#chat').html(data.join(''));
 				$("#chat").animate({ scrollTop: $("#chat")[0].scrollHeight });
-			});
+			}, 'json');
 		}
 	});
 });

@@ -38,7 +38,7 @@ header ul li a {
 header ul li:last-child {
 	margin-left: 10px;
 }
-header ul li:first-child {
+header ul li:first-child.leave {
 	float: left;
 }
 aside {
@@ -97,4 +97,10 @@ h3 {
 	overflow: auto;
 	width: 302px;
 	padding-right: 10px;
+}
+#chat .action {
+	font-style: italic;
+	font-size: .9em;
+	text-align: right;
+	padding-right: 17px;
 }
