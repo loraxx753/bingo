@@ -14,6 +14,9 @@
 		<h1>Novatnak Bingo</h1>
 		<ul>
 		<?php if (Session::get('username')) { ?>
+			<?php if(Uri::segment(1) == 'game' && Uri::segment(2) == 'play') { ?>
+			<li class="leave"><a href="/game/leave/<?=Uri::segment(3)?>">Leave Game</a></li>
+			<?php } ?>
 			<li><?=Session::get('username')?></li>
 			<li><a href="/user/logout">Logout</a></li>
 		<?php } else { ?>

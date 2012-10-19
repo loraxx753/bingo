@@ -28,16 +28,17 @@
 	} ?>
 	</tr>
 	</table>
-</section>
-<aside>
-	<h3>People Currently Playing:</h3>
-	<ul>
-		<li><a href="/game/leave/<?=Uri::segment(3)?>">Leave Game</a></li>
-	</ul>
+</section><aside>
+	<div id="current_players">
+	<h3>People Currently Playing</h3>
+		<ul id="players">
+			<?php foreach ($players as $player) { ?>
+			<li><?=$player?></li>
+			<?php } ?>
+		</ul>
+	</div>
+	<div id="chat">
 
-	<ul id="players">
-		<?php foreach ($players as $player) { ?>
-		<li><?=$player?></li>
-		<?php } ?>
-	</ul>
+	</div>
+	<input type="text" name="chat_input" id="chat_input" placeholder="Start typing..." />
 </aside>

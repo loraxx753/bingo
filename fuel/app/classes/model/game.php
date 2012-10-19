@@ -7,6 +7,7 @@ class Model_Game extends \Orm\Model
 		'players',
 		'moves',
 		'winner',
+		'chat',
 		'created_at',
 		'updated_at'
 	);

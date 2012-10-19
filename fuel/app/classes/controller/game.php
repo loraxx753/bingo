@@ -117,4 +117,12 @@ class Controller_Game extends Controller_Template
 		$game->winner = Session::get('username');
 		$game->save();
 	}
+	public function action_chat($crypt)
+	{
+		$this->template = null;
+		$game = Model_Game::find_by_id(Crypt::decode($crypt));
+		$game->chat .= "<p><strong>".Session::get('username').":</strong>&nbsp".Input::post('text')."</p>";
+		$game->save();
+		echo $game->chat;
+	}
 }

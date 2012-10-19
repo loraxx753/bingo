@@ -1,7 +1,6 @@
 function heartbeat() {
 	hash = document.URL.split('/').pop();
 	$.post('/game/update/'+hash, function(data) {
-		console.log(data.moves);
 		lis = '';
 		for(i in data.players)
 		{
@@ -133,6 +132,17 @@ $(document).ready(function() {
 			$.post('/game/unmove/'+hash, {'square' : square});
 		}
 		beat = setInterval(heartbeat, 1000);
-
+	});
+	$('#chat_input').keypress(function(e) {
+		if(e.which == 13)
+		{
+			$this = $(this);
+			text = $(this).val();
+			hash = document.URL.split('/').pop();
+			$.post('/game/chat/'+hash, {'text' : text}, function(data) {
+				$this.val('');
+				$('#chat').html(data);
+			});
+		}
 	});
 });
