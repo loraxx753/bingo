@@ -1,0 +1,62 @@
+body {
+	font-family: 'Archivo Narrow', sans-serif;
+	width: 960px;
+	margin: 0 auto;
+}
+td {
+	width: 116px;
+	height: 90px;
+	text-align: center;
+	font-weight: bold;
+	padding: 6px;
+}
+td:hover {
+	cursor: pointer;
+}
+table {
+	border-collapse: collapse;
+	margin: 0 auto;
+}
+.selected {
+	background: #A00;
+}
+h1 {
+	text-align: center;
+}
+header ul {
+	text-align: right;
+}
+header ul li {
+	display: inline-block;
+}
+header ul li a {
+	font-weight: bold;
+	color:#000;
+	text-decoration: none;
+}
+header ul li:first-child {
+	margin-right: 10px;
+}
+aside {
+	display: inline-block;
+	width: 200px;
+	vertical-align: top;
+}
+section {
+	width: 750px;
+	display: inline-block;
+}
+#login ul li {
+	text-align: center;
+	list-style: none;
+}
+#login ul li input[type=text], #login ul li input[type=password] {
+	padding: 10px;
+	border-radius: 10px;
+	border: 1px #000 solid;
+	width: 300px;
+	font-size: 1.3em;
+}
+#login ul li input[type=text]:active {
+	border: #000;
+}

@@ -5,6 +5,7 @@ class Controller_Game extends Controller_Template
 
 	public function action_play($crypt)
 	{
+		$this->template->js = array("https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js", 'game.js');
 		$game_id = Crypt::decode($crypt);
 		$game = Model_Game::find_by_id($game_id);
 		$data['players'] = json_decode($game->players, true);
