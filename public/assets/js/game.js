@@ -30,8 +30,12 @@ function heartbeat() {
 		}
 		if(data.chat)
 		{
-			$('#chat').html(data.chat);
-			$("#chat").animate({ scrollTop: $("#chat")[0].scrollHeight });
+			var prev_chat = $('#chat').html();
+			if(prev_chat != data.chat)
+			{
+				$('#chat').html(data.chat);
+				$("#chat").animate({ scrollTop: $("#chat")[0].scrollHeight });
+			}
 		}
 
 	}, 'json');

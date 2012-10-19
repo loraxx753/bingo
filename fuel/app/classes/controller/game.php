@@ -122,7 +122,7 @@ class Controller_Game extends Controller_Template
 	{
 		$this->template = null;
 		$game = Model_Game::find_by_id(Crypt::decode($crypt));
-		$game->chat .= "<p><strong>".Session::get('username').":</strong>&nbsp".htmlspecialchars(Input::post('text'))."</p>";
+		$game->chat .= "<p><strong>".Session::get('username').": </strong> ".htmlspecialchars(Input::post('text'))."</p>";
 		$game->save();
 		echo $game->chat;
 	}
