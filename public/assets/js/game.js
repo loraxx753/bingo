@@ -31,7 +31,7 @@ function heartbeat() {
 		if(data.chat)
 		{
 			$('#chat').html(data.chat);
-			$("#chat").animate({ scrollTop: $("#chat").height() });
+			$("#chat").animate({ scrollTop: $("#chat")[0].scrollHeight });
 		}
 
 	}, 'json');
@@ -147,7 +147,7 @@ $(document).ready(function() {
 			$.post('/game/chat/'+hash, {'text' : text}, function(data) {
 				$this.val('');
 				$('#chat').html(data);
-				$("#chat").animate({ scrollTop: $("#chat").height() });
+				$("#chat").animate({ scrollTop: $("#chat")[0].scrollHeight });
 			});
 		}
 	});
