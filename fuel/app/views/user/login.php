@@ -11,9 +11,10 @@
 	<?php } ?>
 	<form action="/user/login" method="post">
 		<ul> 
-			<li><input type="text" name="username" <?=(isset($login_error)) ? "value='$username'" : '' ?> placeholder="Username" /></li>
-			<li><input type="password" name="password" placeholder="Password" /></li>
+			<li><label>Username: </label> <input type="text" name="username" <?=(isset($login_error)) ? "value='$username'" : '' ?> /></li>
+			<li><label>Password: </label> <input type="password" name="password" /></li>
 			<li><input type="submit" name="login" value="Login" /></li>
 		</ul>
 	</form>
+</form>
 </div>

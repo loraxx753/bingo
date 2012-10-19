@@ -1,8 +1,10 @@
-<p>There are <?=count($games)?> games in progress</p>
-
+<ul class="games">
+	<li>There <?=(count($games) == 1) ? "is ".count($games)." game " : "are ".count($games)." games "?>in progress</li>
+	<li><a href="game/create">Create Game</a></li>
+</ul>
 <?php 
 if(count($games) > 0) { 
-	echo "<ul>";
+	echo "<ul class='game_list'>";
 	$count = 1;
 	foreach($games as $game) {
 	?>
@@ -15,6 +17,3 @@ if(count($games) > 0) {
 	}
 	echo "</ul>";
 }?>
-
-
-<p><a href="game/create">Create Game</a></p>
