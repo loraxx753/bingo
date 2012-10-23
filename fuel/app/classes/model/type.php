@@ -1,11 +1,11 @@
 <?php
 
-class Model_Square extends \Orm\Model
+class Model_Type extends \Orm\Model
 {
 	protected static $_properties = array(
 		'id',
-		'value',
-		'type',
+		'name',
+		'catagory',
 		'created_at',
 		'updated_at'
 	);
@@ -21,11 +21,21 @@ class Model_Square extends \Orm\Model
 		),
 	);
 
-	protected static $_belongs_to = array(
-		'type' => array(
-			'key_from' => 'type',
-			'model_to' => 'Model_Type',
-			'key_to' => 'id',
+	protected static $_has_many = array(
+		'squares' => array(
+			'key_from' => 'id',
+			'model_to' => 'Model_Square',
+			'key_to' => 'type',
+			'cascade_save' => true,
+			'cascade_delete' => false,
+		)
+	);
+
+	protected static $_has_many = array(
+		'games' => array(
+			'key_from' => 'id',
+			'model_to' => 'Model_Game',
+			'key_to' => 'type',
 			'cascade_save' => true,
 			'cascade_delete' => false,
 		)

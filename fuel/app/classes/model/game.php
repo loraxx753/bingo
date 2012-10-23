@@ -8,6 +8,7 @@ class Model_Game extends \Orm\Model
 		'moves',
 		'winner',
 		'chat',
+		'type',
 		'created_at',
 		'updated_at'
 	);
@@ -21,5 +22,15 @@ class Model_Game extends \Orm\Model
 			'events' => array('before_save'),
 			'mysql_timestamp' => false,
 		),
+	);
+	
+	protected static $_belongs_to = array(
+		'type' => array(
+			'key_from' => 'type',
+			'model_to' => 'Model_Type',
+			'key_to' => 'id',
+			'cascade_save' => true,
+			'cascade_delete' => false,
+		)
 	);
 }
