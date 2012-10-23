@@ -28,16 +28,13 @@ class Model_Type extends \Orm\Model
 			'key_to' => 'type',
 			'cascade_save' => true,
 			'cascade_delete' => false,
-		)
-	);
-
-	protected static $_has_many = array(
+		),
 		'games' => array(
 			'key_from' => 'id',
 			'model_to' => 'Model_Game',
 			'key_to' => 'type',
 			'cascade_save' => true,
 			'cascade_delete' => false,
-		)
+		)		
 	);
 }

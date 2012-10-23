@@ -14,13 +14,9 @@ class Create_types
 			'updated_at' => array('constraint' => 11, 'type' => 'int'),
 
 		), array('id'));
-		\DB::query('ALTER TABLE  `squares` ADD  `type` INT NOT NULL AFTER  `value`')->execute();
-		\DB::query('ALTER TABLE  `games` ADD  `type` INT NOT NULL AFTER  `chat`')->execute();
 	}
 	public function down()
 	{
 		\DBUtil::drop_table('types');
-		\DB::query('ALTER TABLE `squares` DROP `type`')->execute();
-		\DB::query('ALTER TABLE `games` DROP `type`')->execute();
 	}
 }

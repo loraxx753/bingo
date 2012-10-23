@@ -9,6 +9,7 @@ class Create_squares
 		\DBUtil::create_table('squares', array(
 			'id' => array('constraint' => 11, 'type' => 'int', 'auto_increment' => true),
 			'value' => array('type' => 'text'),
+			'type' => array('constraint' => 11, 'type' => 'int'),
 			'created_at' => array('constraint' => 11, 'type' => 'int'),
 			'updated_at' => array('constraint' => 11, 'type' => 'int'),
 
