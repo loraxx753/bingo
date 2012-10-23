@@ -14,7 +14,7 @@ class Controller_Game extends Controller_Template
 		if(Session::get('board'))
 		{
 			$board = Model_Board::find_by_id(Session::get('board'));
-			$configuration = json_decode($board->configuration, true);
+			$configuration = unserialize(Session::get('board'));
 			$data['squares'] = Model_Square::find();
 			foreach ($configuration as $square) {
 				$data['squares']->or_where('id', $square);
@@ -29,16 +29,8 @@ class Controller_Game extends Controller_Template
 			{
 				$configuration[] = $square->id;
 			}
-			$configuration = json_encode($configuration);
-			$board = Model_Board::find()->where('configuration', $configuration)->get_one();
-
-			if($board == NULL)
-			{
-				$board = Model_Board::forge();
-				$board->configuration = $configuration;
-				$board->save();
-			}
-			Session::set('board', $board->id);
+			$configuration = serialize($configuration);
+			Session::set('board', $configuration);
 			Session::set('moves', array());
 		}
 

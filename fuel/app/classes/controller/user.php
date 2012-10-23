@@ -48,37 +48,61 @@ class Controller_User extends Controller_Template
 
 	public function action_register()
 	{
-		$data = array();
 		if(Input::post('register'))
 		{
-			$data['error'] = array();
+			$error = array();
 			$post = Input::post();
 			foreach($post as $item)
 			{
 				if(empty($item))
 				{
-					$data['error'][] = "You must fill everything out";
+					$error[] = "You must fill everything out";
 				}
 				break;
 			}
 			if($post['password'] != $post['password2'])
 			{
-				$data['error'][] = 'Password mismatch';
+				$error[] = 'Password mismatch';
 			}
 			if(empty($post['password']) || empty($post['password2']))
 			{
-				$data['error'][] = 'Passwords cannot be blank!';
+				$error[] = 'Passwords cannot be blank!';
 			}
 			if(!preg_match("/^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.([A-Za-z]{2,4}|museum)$/", $post['email']))
 			{
-				$data['error'][] = "Email not formatted";
+				$error[] = "Email not formatted";
+			}
+			if(strlen($post['password']) < 5)
+			{
+				$error[] = "Password must be longer than 5 characters";
+			}
+			if(strlen($post['username']) < 5)
+			{
+				$error[] = "Username must be longer than 5 characters";
 			}
 
-			if(count($data['error']) == 0)
+
+			if(count($error) == 0)
 			{
 				$auth = Auth::instance();
-				$auth->create_user($post['username'], $post['password'], $post['email']);
-				$data['success'] = "You have successfully registered!";
+				
+				try
+				{
+					$auth->create_user($post['username'], $post['password'], $post['email']);
+				}
+				catch(Auth\SimpleUserUpdateException $e)
+				{
+					$error[] = $e->getMessage();
+				}				
+			}
+			if(count($error) == 0)
+			{
+				Session::set_flash('success', array("You have successfully registered!"));
+			}
+			else
+			{
+				Session::set_flash('error', $error);
+				Session::set_flash('info', array('username' => $post['username'], 'email' => $post['email']));
 			}
 		}
 

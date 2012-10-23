@@ -122,6 +122,13 @@ input[type=submit]:hover {
 }
 .error li {
 	color: #a00;
+	list-style: none;
+	text-align: center;
+}
+.success li {
+	color: #0a0;
+	text-align: center;
+	list-style: none;
 }
 form label {
 	display: block;
