@@ -107,7 +107,7 @@ class Controller_User extends Controller_Template
 		}
 
 		$this->template->title = 'User &raquo; Register';
-		$this->template->content = View::forge('user/register', $data);
+		$this->template->content = View::forge('user/register');
 	}
 
 }

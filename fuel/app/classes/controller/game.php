@@ -1,20 +1,19 @@
 <?php
 
-class Controller_Game extends Controller_Template
+class Controller_Game extends Base_Manager
 {
 
 	public function action_play($crypt)
 	{
 		$this->template->js = array("https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js", 'game.js');
 		$game_id = Crypt::decode($crypt);
-		$game = Model_Game::find_by_id($game_id);
+		$game = Model_Game::find()->where('id', $game_id)->related('parent')->get_one();
 		$data['players'] = json_decode($game->players, true);
-
+		$data['type'] = $game->parent->name;
 		$data['username'] = Session::get('username');
-		if(Session::get('board'))
+		if($configuration = Session::get('board'))
 		{
-			$board = Model_Board::find_by_id(Session::get('board'));
-			$configuration = unserialize(Session::get('board'));
+			$configuration = unserialize($configuration);
 			$data['squares'] = Model_Square::find();
 			foreach ($configuration as $square) {
 				$data['squares']->or_where('id', $square);
@@ -23,7 +22,7 @@ class Controller_Game extends Controller_Template
 		}
 		else
 		{
-			$data['squares'] = Model_Square::find()->order_by(DB::expr('RAND()'))->limit(24)->get();
+			$data['squares'] = Model_Square::find()->where('type', $game->type)->order_by(DB::expr('RAND()'))->limit(24)->get();
 			$configuration = array();
 			foreach($data['squares'] as $square)
 			{
@@ -38,13 +37,15 @@ class Controller_Game extends Controller_Template
 		$this->template->title = 'Game &raquo; Index';
 		$this->template->content = View::forge('game/index', $data);
 	}
-	public function action_create()
+	public function action_create($type)
 	{
 		$this->template = null;
 		$game = Model_Game::forge();
 		$players = array();
 		$players[] = Session::get('username');
 		$game->players = json_encode($players);
+		$game->creator = Model_User::find()->where('login_hash', Session::get('login_hash'))->get_one()->id;
+		$game->type = $type;
 		$game->save();
 
 		$crypt = Crypt::encode($game->id);
@@ -103,7 +104,7 @@ class Controller_Game extends Controller_Template
 		$game->players = json_encode((array)$players);
 		$game->chat = $this->add_chat($game->chat, "<p class='action'>".Session::get('username')." has left.</p>");
 		$game->save();
-		Response::redirect('/manager');
+		Response::redirect('/type/'.$game->type);
 	}
 	public function action_winner($crypt)
 	{

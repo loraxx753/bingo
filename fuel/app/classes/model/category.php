@@ -1,15 +1,10 @@
 <?php
 
-class Model_Game extends \Orm\Model
+class Model_Category extends \Orm\Model
 {
 	protected static $_properties = array(
 		'id',
-		'players',
-		'creator',
-		'moves',
-		'winner',
-		'chat',
-		'type',
+		'name',
 		'created_at',
 		'updated_at'
 	);
@@ -24,23 +19,13 @@ class Model_Game extends \Orm\Model
 			'mysql_timestamp' => false,
 		),
 	);
-	
-	protected static $_belongs_to = array(
-		'type' => array(
-			'key_from' => 'type',
+	protected static $_has_many = array(
+		'types' => array(
+			'key_from' => 'id',
 			'model_to' => 'Model_Type',
-			'key_to' => 'id',
+			'key_to' => 'category',
 			'cascade_save' => true,
 			'cascade_delete' => false,
-		)
-	);
-	protected static $_has_one = array(
-		'parent' => array(
-			'key_from' => 'type',
-			'model_to' => 'Model_Type',
-			'key_to' => 'id',
-			'cascade_save' => true,
-			'cascade_delete' => false,
-		)
+		),
 	);
 }

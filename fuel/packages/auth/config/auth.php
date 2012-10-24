@@ -20,7 +20,7 @@
  */
 
 return array(
-	'driver' => 'SimpleAuth',
+	'driver' => array('SimpleAuth'),
 	'verify_multiple_logins' => false,
 	'salt' => 'THIS SOIFJSODJFOISFSJGOI J jojoijf osfsdlfgjos jdg2390ir502893u9r@#$@#$@$@#',
 );

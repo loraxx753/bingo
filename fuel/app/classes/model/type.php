@@ -5,7 +5,7 @@ class Model_Type extends \Orm\Model
 	protected static $_properties = array(
 		'id',
 		'name',
-		'catagory',
+		'category',
 		'created_at',
 		'updated_at'
 	);
@@ -19,6 +19,16 @@ class Model_Type extends \Orm\Model
 			'events' => array('before_save'),
 			'mysql_timestamp' => false,
 		),
+	);
+
+	protected static $_belongs_to = array(
+		'type' => array(
+			'key_from' => 'category',
+			'model_to' => 'Model_Category',
+			'key_to' => 'id',
+			'cascade_save' => true,
+			'cascade_delete' => false,
+		)
 	);
 
 	protected static $_has_many = array(

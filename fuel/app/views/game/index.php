@@ -12,7 +12,7 @@
 <section>
 	<?php $row = 0; $column = 0; ?>
 
-	<table border="1">
+	<table class="game_board">
 	<tr>
 	<?php foreach($squares as $square)  { ?>
 		<?php if($column > 4)
@@ -30,7 +30,7 @@
 	</table>
 </section><aside>
 	<div id="current_players">
-	<h3>People Currently Playing</h3>
+		<h3>People Currently Playing</h3>
 		<ul id="players">
 			<?php foreach ($players as $player) { ?>
 			<li><?=$player?></li>

@@ -26,7 +26,12 @@ abstract class Auth_Group_Driver extends \Auth_Driver
 	 */
 	protected static $_instances = array();
 
-	public static function forge(array $config = array())
+	// autoload the SimpleAcl acl driver when loading this group driver
+    protected $config = array(
+        'drivers' => array('acl' => array('SimpleAcl'))
+    );
+    
+   	public static function forge(array $config = array())
 	{
 		// default driver id to driver name when not given
 		! array_key_exists('id', $config) && $config['id'] = $config['driver'];

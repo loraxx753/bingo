@@ -11,7 +11,7 @@
 </head>
 <body>
 	<header>
-		<h1>Novatnak Bingo</h1>
+		<h1><a href="/">Need My Bingo</a></h1>
 		<ul>
 		<?php if (Session::get('username')) { ?>
 			<?php if(Uri::segment(1) == 'game' && Uri::segment(2) == 'play') { ?>

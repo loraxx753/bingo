@@ -11,6 +11,7 @@ class Create_games
 			'moves' => array('type' => 'text', 'null' => true),
 			'players' => array('type' => 'text'),
 			'winner' => array('constraint' => 255, 'type' => 'varchar', 'default' => 'null', 'null' => true),
+			'type' => array('constraint' => 11, 'type' => 'int'),
 			'created_at' => array('constraint' => 11, 'type' => 'int'),
 			'updated_at' => array('constraint' => 11, 'type' => 'int'),
 
